@@ -100,6 +100,15 @@ php standalone/set_user_expiration.php UID VALOR [UNIDAD] [--dry-run]
 - `UNIDAD`: s=segundos, m=minutos, h=horas, d=días (defecto: d)
 - `--dry-run`: mostrar cambios sin aplicar
 
+**Unidades disponibles:**
+
+| Símbolo | Unidad | Segundos equivalentes |
+|---------|--------|----------------------|
+| `s` | Segundos | 1 |
+| `m` | Minutos | 60 |
+| `h` | Horas | 3,600 |
+| `d` | Días | 86,400 |
+
 **Ejemplos:**
 
 ```bash
@@ -147,6 +156,8 @@ Los archivos HTML tienen estilos inline, no requieren archivos CSS externos.
 | LDAP_SSL | false | Usar SSL (true/false) |
 | LDAP_TIMEOUT | 10 | Timeout en segundos |
 | APP_TIMEZONE | America/Asuncion | Zona horaria para reportes |
+| AUDIT_ENABLED | true | Activar/desactivar auditoría de ejecuciones |
+| AUDIT_LOG_PATH | docs/ldap/execution_ldap_audit.log | Ruta del log de auditoría (vacío = default del proyecto) |
 
 ---
 
@@ -249,26 +260,35 @@ php -m | grep ldap
 | Dependencias | Laravel framework | PHP nativo |
 | Portabilidad | Requiere Laravel | Solo PHP |
 
+---
 
+## Referencia Rápida
 
-
-
-
-
-
-
-
+```bash
 # Verificar conectividad
 php standalone/verify_connection.php
 
-# Generar reportes
+# Reportes generales
 php standalone/check_expired_passwords.php
 php standalone/list_active_users.php
-php standalone/show_user_permissions.php christian.riveros
+php standalone/list_groups_members.php
 
-# Modificar expiración (90 días)
-php standalone/set_user_expiration.php sergio.gonzalez 90
+# Permisos de un usuario
+php standalone/show_user_permissions.php willians.ojeda
 
-# Probar cambios sin aplicar
-php standalone/set_user_expiration.php sergio.gonzalez 90 d --dry-run
+# Modificar expiración (30 días)
+php standalone/set_user_expiration.php willians.ojeda 30
+
+# Modificar expiración (6 horas)
+php standalone/set_user_expiration.php willians.ojeda 6 h
+
+# Simular cambio sin aplicar (dry-run)
+php standalone/set_user_expiration.php willians.ojeda 90 d --dry-run
+
+# Ver log de auditoría
+tail -n 20 docs/ldap/execution_ldap_audit.log
+
+# Ver quién aplicó cambios de expiración
+grep '"action":"set_user_expiration_applied"' docs/ldap/execution_ldap_audit.log
+```
 
