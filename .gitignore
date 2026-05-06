@@ -1,0 +1,19 @@
+# Archivos de configuración
+.env
+.env.local
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Reportes (opcional - comentar si quieres versionarlos)
+# docs/ldap/*.txt
+# docs/ldap/*.html
+
+# Sistema
+.DS_Store
+Thumbs.db
