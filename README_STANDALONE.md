@@ -1,6 +1,6 @@
 # LDAP Standalone Scripts
 
-Scripts PHP puros para gestionar LDAP sin depender de Laravel Artisan.
+Scripts PHP puros para gestionar LDAP.
 
 ## Requisitos
 
@@ -247,18 +247,6 @@ php -m | grep ldap
 - Revisar credenciales en `.env`
 - Verificar DN exacto del usuario
 - Confirmar que el usuario tiene permisos
-
----
-
-## Diferencias con versión Laravel
-
-| Aspecto | Laravel | Standalone |
-|--------|---------|-----------|
-| Ejecución | `php artisan ldap:...` | `php standalone/...php` |
-| Configuración | `.env` en raíz | `.env` en raíz |
-| Reportes | Iguales | Iguales |
-| Dependencias | Laravel framework | PHP nativo |
-| Portabilidad | Requiere Laravel | Solo PHP |
 
 ---
 
