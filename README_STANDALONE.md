@@ -8,6 +8,19 @@ Scripts PHP puros para gestionar LDAP.
 - Acceso de red al servidor LDAP
 - Credenciales LDAP en archivo `.env`
 
+Verificar/instalar extensión LDAP en Debian/Ubuntu/Pop!_OS:
+
+```bash
+# Verificar si está instalada
+php -m | grep ldap
+
+# Instalar si no está
+sudo apt install php-ldap
+
+# O para una versión específica
+sudo apt install php8.3-ldap
+```
+
 ## Configuración
 
 Copiar `.env.example` a `.env` y completar con tus credenciales:
@@ -228,13 +241,19 @@ php standalone/set_user_expiration.php willians.ojeda 30 d --dry-run
 
 ### Error: "La extension LDAP de PHP no esta habilitada"
 ```bash
-# En Debian/Ubuntu
-sudo apt-get install php-ldap
+# Verificar si está instalada
+php -m | grep ldap
+
+# Instalar si no está (Debian/Ubuntu/Pop!_OS)
+sudo apt install php-ldap
+
+# o para una versión específica
+sudo apt install php8.3-ldap
 
 # En RedHat/CentOS
 sudo yum install php-ldap
 
-# Reiniciar PHP o verificar
+# Verificar nuevamente
 php -m | grep ldap
 ```
 
